@@ -7,8 +7,8 @@ import Providers from '../components/Providers';
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata = {
-  title: 'LearnlyAI',
-  description: 'Flashcard Generator',
+  title: 'SparkCards',
+  description: 'AI-Powered Flashcard Generator',
 };
 
 export default function RootLayout({ children }) {

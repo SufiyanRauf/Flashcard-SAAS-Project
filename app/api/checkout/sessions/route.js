@@ -43,7 +43,7 @@ export async function GET(req) {
   try {
     const checkoutSession = await stripe.checkout.sessions.retrieve(sessionId);
     return NextResponse.json(checkoutSession);
-  } catch (error)
+  } catch (error) { // <-- Added opening curly brace
     return NextResponse.json(
       { error: { message: `Error retrieving checkout session: ${error.message}` } },
       { status: 500 }
