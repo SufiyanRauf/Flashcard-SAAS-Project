@@ -17,7 +17,7 @@ export async function POST(req) {
           product_data: {
             name: "Pro Subscription",
           },
-          unit_amount: formatAmountForStripe(10),
+          unit_amount: formatAmountForStripe(5), // <-- Price updated to $5
           recurring: {
             interval: "month",
             interval_count: 1,
@@ -43,7 +43,7 @@ export async function GET(req) {
   try {
     const checkoutSession = await stripe.checkout.sessions.retrieve(sessionId);
     return NextResponse.json(checkoutSession);
-  } catch (error) { // <-- Added opening curly brace
+  } catch (error) {
     return NextResponse.json(
       { error: { message: `Error retrieving checkout session: ${error.message}` } },
       { status: 500 }
