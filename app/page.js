@@ -137,19 +137,21 @@ export default function Home() {
             <Grid item xs={12} md={5}>
               <Paper sx={{ p: 4, height: '100%' }}>
                 <Typography variant="h5" gutterBottom>Basic</Typography>
-                <Typography variant="h4" component="div" gutterBottom>$5<span style={{ fontSize: '1rem', color: '#5f6368' }}>/mo</span></Typography>
+                <Typography variant="h4" component="div" gutterBottom>
+                  Free
+                </Typography>
                 <Typography color="text.secondary" sx={{ minHeight: '72px' }}>
                   Access to basic flashcard features and up to 10 study sets.
                 </Typography>
-                <Button variant="outlined" color="primary" sx={{ mt: 3 }}>
-                  Choose Basic
+                <Button variant="outlined" color="primary" sx={{ mt: 3 }} href="/generate">
+                  Start Learning
                 </Button>
               </Paper>
             </Grid>
             <Grid item xs={12} md={5}>
               <Paper sx={{ p: 4, border: '2px solid', borderColor: 'primary.main', height: '100%' }}>
                 <Typography variant="h5" gutterBottom>Pro</Typography>
-                <Typography variant="h4" component="div" gutterBottom>$10<span style={{ fontSize: '1rem', color: '#5f6368' }}>/mo</span></Typography>
+                <Typography variant="h4" component="div" gutterBottom>$5<span style={{ fontSize: '1rem', color: '#5f6368' }}>/mo</span></Typography>
                 <Typography color="text.secondary" sx={{ minHeight: '72px' }}>
                   Unlimited flashcards, unlimited study sets, and priority support.
                 </Typography>
