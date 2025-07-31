@@ -1,4 +1,4 @@
-'use client';
+"use client";
 import { SignedIn, SignedOut, UserButton } from "@clerk/nextjs";
 import {
   AppBar,
@@ -10,8 +10,7 @@ import {
   Typography,
 } from "@mui/material";
 import Head from "next/head";
-import Image from "next/image"; 
-import getStripe from '@/utils/get-stripe'
+import getStripe from "@/utils/get-stripe";
 
 export default function Home() {
   const handleSubmit = async (event) => {
@@ -19,9 +18,6 @@ export default function Home() {
 
     const checkoutSession = await fetch("/api/checkout/sessions", {
       method: "POST",
-      headers: {
-        origin: "http://localhost:3000",
-      },
     });
 
     const checkoutSessionJSON = await checkoutSession.json();
