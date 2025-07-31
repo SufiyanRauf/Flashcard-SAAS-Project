@@ -1,4 +1,5 @@
 "use client";
+import { Suspense } from 'react';
 import {
   Box,
   CircularProgress,
@@ -8,7 +9,8 @@ import {
 import { useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
 
-export default function Results() {
+// This new component contains all the logic that depends on the URL.
+function ResultsDisplay() {
   const [session, setSession] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -17,7 +19,11 @@ export default function Results() {
 
   useEffect(() => {
     const fetchCheckoutSession = async () => {
-      if (!sessionId) return;
+      if (!sessionId) {
+        setLoading(false);
+        setError("Session ID not found.");
+        return;
+      }
       try {
         const res = await fetch(`/api/checkout/sessions?session_id=${sessionId}`);
         const sessionData = await res.json();
@@ -27,7 +33,7 @@ export default function Results() {
           setError(sessionData.error.message);
         }
       } catch (e) {
-        setError("An error occurred.");
+        setError("An error occurred while fetching the session.");
       } finally {
         setLoading(false);
       }
@@ -37,18 +43,10 @@ export default function Results() {
 
   if (loading) {
     return (
-      <Container
-        sx={{
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          height: "100vh",
-          flexDirection: "column",
-        }}
-      >
+      <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '80vh', flexDirection: 'column' }}>
         <CircularProgress />
-        <Typography sx={{ mt: 2 }}>Loading...</Typography>
-      </Container>
+        <Typography sx={{ mt: 2 }}>Verifying your payment...</Typography>
+      </Box>
     );
   }
 
@@ -56,7 +54,7 @@ export default function Results() {
     return (
       <Container sx={{ mt: 4 }}>
         <Typography variant="h4" color="error">
-          Error
+          Payment Error
         </Typography>
         <Typography variant="h6" color="error">
           {error}
@@ -89,4 +87,13 @@ export default function Results() {
       </Container>
     );
   }
+}
+
+// The main page component now wraps the logic in a Suspense boundary.
+export default function Results() {
+  return (
+    <Suspense fallback={<Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '80vh' }}><CircularProgress /></Box>}>
+      <ResultsDisplay />
+    </Suspense>
+  );
 }
