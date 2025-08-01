@@ -17,17 +17,30 @@ Return in the following JSON format:
 }`;
 
 export async function POST(req) {
-  const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
-  const { text } = await req.json();
+  try {
+    const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
+    const { text } = await req.json();
 
-  // Change this line to use the new model name
-  const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+    const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
 
-  const prompt = `${systemPrompt}\n\n${text}`;
+    const prompt = `${systemPrompt}\n\n${text}`;
 
-  const result = await model.generateContent(prompt);
-  const response = await result.response;
-  const flashcards = JSON.parse(response.text());
+    const result = await model.generateContent(prompt);
+    const response = await result.response;
+    const responseText = response.text();
 
-  return NextResponse.json({ flashcards: flashcards.flashcards });
+    try {
+      // Attempt to parse the JSON
+      const flashcards = JSON.parse(responseText);
+      return NextResponse.json({ flashcards: flashcards.flashcards });
+    } catch (e) {
+      // If parsing fails, the model likely returned a non-JSON response.
+      console.error("Failed to parse JSON from Gemini API:", responseText);
+      return NextResponse.json({ error: "The AI returned an invalid response. Please try again." }, { status: 500 });
+    }
+
+  } catch (error) {
+    console.error("Error in generate API route:", error);
+    return NextResponse.json({ error: error.message || "An unexpected error occurred." }, { status: 500 });
+  }
 }
