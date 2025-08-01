@@ -115,16 +115,16 @@ export default function Generate() {
     <Container>
       <Box sx={{ my: 4, textAlign: "center" }}>
         <Typography variant="h4" gutterBottom>
-          Generate Flashcards
+          Ready to Learn?
         </Typography>
-        <Typography variant="body1" gutterBottom>
-          Generates 10 flashcards.
+        <Typography variant="body1" color="text.secondary" sx={{ mb: 3 }}>
+          Enter a topic, paste your notes, or ask a question below. Our AI will instantly create a set of 10 flashcards to get you started.
         </Typography>
         <Paper sx={{ p: 2 }}>
           <TextField
             value={text}
             onChange={(e) => setText(e.target.value)}
-            label="Enter text"
+            label="Enter a topic, subject, or paste your notes here..."
             fullWidth
             multiline
             rows={4}
@@ -161,8 +161,10 @@ export default function Generate() {
                       transformStyle: "preserve-3d",
                       transition: "transform 0.7s",
                       transform: flipped[index] ? "rotateY(180deg)" : "rotateY(0deg)",
+                      height: "250px", 
                     }}
                   >
+                    {/* Front of the card */}
                     <CardContent
                       sx={{
                         padding: 0,
@@ -180,7 +182,7 @@ export default function Generate() {
                           alignItems: "center",
                           textAlign: "center",
                           p: 3,
-                          height: "250px",
+                          height: "100%",
                           backgroundColor: "background.paper",
                           borderRadius: "inherit",
                         }}
@@ -190,12 +192,16 @@ export default function Generate() {
                         </Typography>
                       </Box>
                     </CardContent>
+                    {/* Back of the card */}
                     <CardContent
                       sx={{
                         padding: 0,
                         "&:last-child": { paddingBottom: 0 },
                         backfaceVisibility: "hidden",
                         transform: "rotateY(180deg)",
+                        position: "absolute",
+                        width: "100%",
+                        height: "100%",
                       }}
                     >
                       <Box
@@ -205,7 +211,7 @@ export default function Generate() {
                           alignItems: "center",
                           textAlign: "center",
                           p: 3,
-                          height: "250px",
+                          height: "100%",
                           backgroundColor: "primary.light",
                           color: "primary.contrastText",
                           borderRadius: "inherit",
