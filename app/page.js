@@ -1,12 +1,9 @@
 "use client";
-import { SignedIn, SignedOut, UserButton } from "@clerk/nextjs";
 import {
-  AppBar,
   Box,
   Button,
   Container,
   Grid,
-  Toolbar,
   Typography,
   Paper,
 } from "@mui/material";
@@ -62,33 +59,13 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <AppBar position="sticky" color="transparent">
-        <Container maxWidth="lg">
-          <Toolbar disableGutters>
-            <Typography variant="h6" component="div" sx={{ flexGrow: 1, fontWeight: 700 }}>
-              SparkCards
-            </Typography>
-            <SignedOut>
-              <Button color="inherit" href="/sign-in">
-                Login
-              </Button>
-              <Button variant="contained" href="/sign-up" sx={{ ml: 2 }}>
-                Sign Up
-              </Button>
-            </SignedOut>
-            <SignedIn>
-              <UserButton />
-            </SignedIn>
-          </Toolbar>
-        </Container>
-      </AppBar>
-
-      <Container maxWidth="lg" sx={{ mt: 4 }}>
+      <Container maxWidth="lg">
         {/* Hero Section */}
         <Box
           sx={{
             textAlign: "center",
-            py: 10,
+            pt: { xs: 4, md: 6 }, // Reduced top padding
+            pb: { xs: 8, md: 10 },
             px: 2,
           }}
         >
