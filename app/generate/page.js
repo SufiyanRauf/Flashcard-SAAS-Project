@@ -148,9 +148,9 @@ export default function Generate() {
           <Typography variant="h5" gutterBottom>
             Flashcards Preview
           </Typography>
-          <Grid container spacing={4} sx={{ mt: 2 }}>
+          <Grid container spacing={2} sx={{ mt: 2 }}>
             {flashcards.map((flashcard, index) => (
-              <Grid item xs={12} sm={6} md={4} key={index}>
+              <Grid item xs={12} sm={6} md={2.4} key={index}>
                 <CardActionArea
                   onClick={() => handleCardClick(index)}
                   sx={{
@@ -186,13 +186,13 @@ export default function Generate() {
                           justifyContent: "center",
                           alignItems: "center",
                           textAlign: "center",
-                          p: 3,
+                          p: 2,
                           height: "100%",
                           backgroundColor: "background.paper",
                           borderRadius: "inherit",
                         }}
                       >
-                        <Typography variant="h6" component="div">
+                        <Typography variant="body1" component="div">
                           {flashcard.front}
                         </Typography>
                       </Box>
@@ -215,14 +215,14 @@ export default function Generate() {
                           justifyContent: "center",
                           alignItems: "center",
                           textAlign: "center",
-                          p: 3,
+                          p: 2,
                           height: "100%",
                           backgroundColor: "primary.light",
                           color: "primary.contrastText",
                           borderRadius: "inherit",
                         }}
                       >
-                        <Typography variant="h6" component="div">
+                        <Typography variant="body1" component="div">
                           {flashcard.back}
                         </Typography>
                       </Box>
