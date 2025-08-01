@@ -20,7 +20,8 @@ export async function POST(req) {
   const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
   const { text } = await req.json();
 
-  const model = genAI.getGenerativeModel({ model: "gemini-pro" });
+  // Change this line to use the new model name
+  const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
 
   const prompt = `${systemPrompt}\n\n${text}`;
 
