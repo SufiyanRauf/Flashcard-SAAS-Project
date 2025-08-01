@@ -32,7 +32,7 @@ import { db } from "@/firebase";
 
 export default function Generate() {
   const { isLoaded, isSignedIn, user } = useUser();
-  const [flashcards, setFlashcards] = useState([]);
+  const [flashcards, setFlashcards] useState([]);
   const [flipped, setFlipped] = useState({});
   const [text, setText] = useState("");
   const [name, setName] = useState("");
@@ -153,15 +153,20 @@ export default function Generate() {
               <Grid item xs={12} sm={6} md={4} key={index}>
                 <CardActionArea
                   onClick={() => handleCardClick(index)}
-                  sx={{ borderRadius: 4 }}
+                  sx={{
+                    borderRadius: 4,
+                    height: "250px",
+                    perspective: "1000px",
+                  }}
                 >
                   <Card
                     sx={{
+                      width: "100%",
+                      height: "100%",
                       borderRadius: 4,
                       transformStyle: "preserve-3d",
                       transition: "transform 0.7s",
                       transform: flipped[index] ? "rotateY(180deg)" : "rotateY(0deg)",
-                      height: "250px", 
                     }}
                   >
                     {/* Front of the card */}
