@@ -97,8 +97,8 @@ const theme = createTheme({
       styleOverrides: {
         root: {
           boxShadow: "none",
-          backgroundColor: 'rgba(255, 255, 255, 0.8)',
-          backdropFilter: 'blur(8px)',
+          backgroundColor: "transparent",
+          backgroundImage: "none", 
         },
       },
     },
