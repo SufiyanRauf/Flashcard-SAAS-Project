@@ -29,8 +29,14 @@ export async function POST(req) {
     const response = await result.response;
     let responseText = response.text();
 
-    // Clean the response text by removing the Markdown code block
-    responseText = responseText.replace(/^```json\s*/, "").replace(/```$/, "");
+    // Find the start and end of the JSON object
+    const jsonStart = responseText.indexOf('{');
+    const jsonEnd = responseText.lastIndexOf('}');
+
+    if (jsonStart !== -1 && jsonEnd !== -1) {
+      // Extract the JSON string
+      responseText = responseText.substring(jsonStart, jsonEnd + 1);
+    }
 
     try {
       // Attempt to parse the cleaned JSON
