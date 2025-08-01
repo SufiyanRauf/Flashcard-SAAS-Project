@@ -27,10 +27,13 @@ export async function POST(req) {
 
     const result = await model.generateContent(prompt);
     const response = await result.response;
-    const responseText = response.text();
+    let responseText = response.text();
+
+    // Clean the response text by removing the Markdown code block
+    responseText = responseText.replace(/^```json\s*/, "").replace(/```$/, "");
 
     try {
-      // Attempt to parse the JSON
+      // Attempt to parse the cleaned JSON
       const flashcards = JSON.parse(responseText);
       return NextResponse.json({ flashcards: flashcards.flashcards });
     } catch (e) {
