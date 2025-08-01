@@ -1,5 +1,6 @@
 "use client";
 import {
+  Alert,
   Box,
   Button,
   Card,
@@ -15,6 +16,7 @@ import {
   Paper,
   TextField,
   Typography,
+  CircularProgress,
 } from "@mui/material";
 import { useUser } from "@clerk/nextjs";
 import { useState } from "react";
@@ -35,15 +37,35 @@ export default function Generate() {
   const [text, setText] = useState("");
   const [name, setName] = useState("");
   const [open, setOpen] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
   const router = useRouter();
 
   const handleSubmit = async () => {
-    const res = await fetch("/api/generate", {
-      method: "POST",
-      body: JSON.stringify({ text }),
-    });
-    const data = await res.json();
-    setFlashcards(data.flashcards);
+    setLoading(true);
+    setError(null);
+    try {
+      const res = await fetch("/api/generate", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ text }),
+      });
+
+      if (!res.ok) {
+        const errorData = await res.json();
+        throw new Error(errorData.error || `An error occurred: ${res.statusText}`);
+      }
+
+      const data = await res.json();
+      setFlashcards(data.flashcards);
+    } catch (err) {
+      console.error(err);
+      setError(err.message);
+    } finally {
+      setLoading(false);
+    }
   };
 
   const handleCardClick = (id) => {
@@ -59,6 +81,7 @@ export default function Generate() {
   };
 
   const saveFlashcards = async () => {
+    if (!user) return;
     const batch = writeBatch(db);
     const userDocRef = doc(collection(db, "users"), user.id);
     const docSnap = await getDoc(userDocRef);
@@ -108,13 +131,15 @@ export default function Generate() {
             variant="outlined"
             sx={{ mb: 2 }}
           />
+          {error && <Alert severity="error" sx={{ mb: 2 }}>{error}</Alert>}
           <Button
             variant="contained"
             color="primary"
             onClick={handleSubmit}
+            disabled={loading}
             fullWidth
           >
-            Generate Flashcards
+            {loading ? <CircularProgress size={24} /> : "Generate Flashcards"}
           </Button>
         </Paper>
       </Box>
