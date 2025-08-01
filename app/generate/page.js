@@ -148,7 +148,6 @@ export default function Generate() {
           <Typography variant="h5" gutterBottom>
             Flashcards Preview
           </Typography>
-          {/* Increased spacing on the Grid container */}
           <Grid container spacing={4} sx={{ mt: 2 }}>
             {flashcards.map((flashcard, index) => (
               <Grid item xs={12} sm={6} md={4} key={index}>
@@ -156,72 +155,65 @@ export default function Generate() {
                   onClick={() => handleCardClick(index)}
                   sx={{ borderRadius: 4 }}
                 >
-                  <Card sx={{ borderRadius: 4 }}>
+                  <Card
+                    sx={{
+                      borderRadius: 4,
+                      transformStyle: "preserve-3d",
+                      transition: "transform 0.7s",
+                      transform: flipped[index] ? "rotateY(180deg)" : "rotateY(0deg)",
+                    }}
+                  >
                     <CardContent
                       sx={{
                         padding: 0,
-                        "&:last-child": {
-                          paddingBottom: 0,
-                        },
+                        "&:last-child": { paddingBottom: 0 },
+                        backfaceVisibility: "hidden",
+                        position: "absolute",
+                        width: "100%",
+                        height: "100%",
                       }}
                     >
                       <Box
                         sx={{
-                          perspective: "1000px",
-                          position: "relative",
-                          width: "100%",
-                          height: "250px", 
+                          display: "flex",
+                          justifyContent: "center",
+                          alignItems: "center",
+                          textAlign: "center",
+                          p: 3,
+                          height: "250px",
+                          backgroundColor: "background.paper",
+                          borderRadius: "inherit",
                         }}
                       >
-                        <Box
-                          sx={{
-                            position: "absolute",
-                            width: "100%",
-                            height: "100%",
-                            backfaceVisibility: "hidden",
-                            display: "flex",
-                            justifyContent: "center",
-                            alignItems: "center",
-                            textAlign: "center",
-                            p: 3,
-                            boxSizing: "border-box",
-                            transition: "transform 0.7s",
-                            transformStyle: "preserve-3d",
-                            transform: flipped[index]
-                              ? "rotateY(-180deg)"
-                              : "rotateY(0deg)",
-                            backgroundColor: "background.paper",
-                            borderRadius: "inherit",
-                          }}
-                        >
-                          <Typography variant="h6" component="div">
-                            {flashcard.front}
-                          </Typography>
-                        </Box>
-                        <Box
-                          sx={{
-                            position: "absolute",
-                            width: "100%",
-                            height: "100%",
-                            backfaceVisibility: "hidden",
-                            transform: "rotateY(180deg)",
-                            display: "flex",
-                            justifyContent: "center",
-                            alignItems: "center",
-                            textAlign: "center",
-                            p: 3,
-                            boxSizing: "border-box",
-                            transition: "transform 0.7s",
-                            transformStyle: "preserve-3d",
-                            backgroundColor: "primary.light",
-                            color: "primary.contrastText",
-                            borderRadius: "inherit",
-                          }}
-                        >
-                          <Typography variant="h6" component="div">
-                            {flashcard.back}
-                          </Typography>
-                        </Box>
+                        <Typography variant="h6" component="div">
+                          {flashcard.front}
+                        </Typography>
+                      </Box>
+                    </CardContent>
+                    <CardContent
+                      sx={{
+                        padding: 0,
+                        "&:last-child": { paddingBottom: 0 },
+                        backfaceVisibility: "hidden",
+                        transform: "rotateY(180deg)",
+                      }}
+                    >
+                      <Box
+                        sx={{
+                          display: "flex",
+                          justifyContent: "center",
+                          alignItems: "center",
+                          textAlign: "center",
+                          p: 3,
+                          height: "250px",
+                          backgroundColor: "primary.light",
+                          color: "primary.contrastText",
+                          borderRadius: "inherit",
+                        }}
+                      >
+                        <Typography variant="h6" component="div">
+                          {flashcard.back}
+                        </Typography>
                       </Box>
                     </CardContent>
                   </Card>
