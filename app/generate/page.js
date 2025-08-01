@@ -148,24 +148,29 @@ export default function Generate() {
           <Typography variant="h5" gutterBottom>
             Flashcards Preview
           </Typography>
-          <Grid container spacing={3}>
+          {/* Increased spacing on the Grid container */}
+          <Grid container spacing={4} sx={{ mt: 2 }}>
             {flashcards.map((flashcard, index) => (
               <Grid item xs={12} sm={6} md={4} key={index}>
-                <CardActionArea onClick={() => handleCardClick(index)}>
-                  <Card>
-                    <CardContent>
+                <CardActionArea
+                  onClick={() => handleCardClick(index)}
+                  sx={{ borderRadius: 4 }}
+                >
+                  <Card sx={{ borderRadius: 4 }}>
+                    <CardContent
+                      sx={{
+                        padding: 0,
+                        "&:last-child": {
+                          paddingBottom: 0,
+                        },
+                      }}
+                    >
                       <Box
                         sx={{
                           perspective: "1000px",
-                          transition: "transform 0.6s",
-                          transformStyle: "preserve-3d",
                           position: "relative",
                           width: "100%",
-                          height: "200px",
-                          boxShadow: "0 4px 8px 0 rgba(0,0,0,0.2)",
-                          transform: flipped[index]
-                            ? "rotateY(180deg)"
-                            : "rotateY(0deg)",
+                          height: "250px", 
                         }}
                       >
                         <Box
@@ -177,11 +182,19 @@ export default function Generate() {
                             display: "flex",
                             justifyContent: "center",
                             alignItems: "center",
-                            p: 2,
+                            textAlign: "center",
+                            p: 3,
                             boxSizing: "border-box",
+                            transition: "transform 0.7s",
+                            transformStyle: "preserve-3d",
+                            transform: flipped[index]
+                              ? "rotateY(-180deg)"
+                              : "rotateY(0deg)",
+                            backgroundColor: "background.paper",
+                            borderRadius: "inherit",
                           }}
                         >
-                          <Typography variant="h5" component="div">
+                          <Typography variant="h6" component="div">
                             {flashcard.front}
                           </Typography>
                         </Box>
@@ -195,11 +208,17 @@ export default function Generate() {
                             display: "flex",
                             justifyContent: "center",
                             alignItems: "center",
-                            p: 2,
+                            textAlign: "center",
+                            p: 3,
                             boxSizing: "border-box",
+                            transition: "transform 0.7s",
+                            transformStyle: "preserve-3d",
+                            backgroundColor: "primary.light",
+                            color: "primary.contrastText",
+                            borderRadius: "inherit",
                           }}
                         >
-                          <Typography variant="h5" component="div">
+                          <Typography variant="h6" component="div">
                             {flashcard.back}
                           </Typography>
                         </Box>
