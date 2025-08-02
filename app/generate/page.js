@@ -9,7 +9,6 @@ import {
   DialogContent,
   DialogContentText,
   DialogTitle,
-  Grid,
   Paper,
   TextField,
   Typography,
@@ -145,83 +144,83 @@ export default function Generate() {
           <Typography variant="h5" gutterBottom>
             Flashcards Preview
           </Typography>
-          <Grid container spacing={2} justifyContent="center" sx={{ mt: 2 }}>
+
+          {/* Fixed 2-row, 5-column grid */}
+          <Box
+            sx={{
+              display: "grid",
+              gridTemplateColumns: "repeat(5, 1fr)",
+              gap: 2,
+              mt: 2,
+            }}
+          >
             {flashcards.map((flashcard, index) => (
-              <Grid
-                item
+              <Box
                 key={index}
                 sx={{
-                  flexBasis: "20%",
-                  maxWidth: "20%",
-                  padding: "8px",
-                  boxSizing: "border-box",
+                  height: "250px",
+                  cursor: "pointer",
+                  perspective: "1000px",
                 }}
+                onClick={() => handleCardClick(index)}
               >
                 <Box
-                  onClick={() => handleCardClick(index)}
                   sx={{
-                    perspective: "1000px",
-                    cursor: "pointer",
-                    height: "250px",
                     width: "100%",
+                    height: "100%",
+                    position: "relative",
+                    transformStyle: "preserve-3d",
+                    transition: "transform 0.7s",
+                    transform: flipped[index] ? "rotateY(180deg)" : "rotateY(0deg)",
                   }}
                 >
-                  <Box
+                  {/* Front Face */}
+                  <Paper
+                    elevation={4}
                     sx={{
+                      position: "absolute",
                       width: "100%",
                       height: "100%",
-                      position: "relative",
-                      transformStyle: "preserve-3d",
-                      transition: "transform 0.7s",
-                      transform: flipped[index] ? "rotateY(180deg)" : "rotateY(0deg)",
+                      backfaceVisibility: "hidden",
+                      display: "flex",
+                      justifyContent: "center",
+                      alignItems: "center",
+                      textAlign: "center",
+                      p: 2,
+                      borderRadius: 4,
+                      boxSizing: "border-box",
                     }}
                   >
-                    {/* Front Face */}
-                    <Paper
-                      elevation={4}
-                      sx={{
-                        position: "absolute",
-                        width: "100%",
-                        height: "100%",
-                        backfaceVisibility: "hidden",
-                        display: "flex",
-                        justifyContent: "center",
-                        alignItems: "center",
-                        textAlign: "center",
-                        p: 2,
-                        borderRadius: 4,
-                        boxSizing: "border-box",
-                      }}
-                    >
-                      <Typography variant="body1">{flashcard.front}</Typography>
-                    </Paper>
-                    {/* Back Face */}
-                    <Paper
-                      elevation={4}
-                      sx={{
-                        position: "absolute",
-                        width: "100%",
-                        height: "100%",
-                        backfaceVisibility: "hidden",
-                        transform: "rotateY(180deg)",
-                        display: "flex",
-                        justifyContent: "center",
-                        alignItems: "center",
-                        textAlign: "center",
-                        p: 2,
-                        borderRadius: 4,
-                        boxSizing: "border-box",
-                        backgroundColor: "primary.main",
-                        color: "primary.contrastText",
-                      }}
-                    >
-                      <Typography variant="body1">{flashcard.back}</Typography>
-                    </Paper>
-                  </Box>
+                    <Typography variant="body1">{flashcard.front}</Typography>
+                  </Paper>
+
+                  {/* Back Face */}
+                  <Paper
+                    elevation={4}
+                    sx={{
+                      position: "absolute",
+                      width: "100%",
+                      height: "100%",
+                      backfaceVisibility: "hidden",
+                      transform: "rotateY(180deg)",
+                      display: "flex",
+                      justifyContent: "center",
+                      alignItems: "center",
+                      textAlign: "center",
+                      p: 2,
+                      borderRadius: 4,
+                      boxSizing: "border-box",
+                      backgroundColor: "primary.main",
+                      color: "primary.contrastText",
+                    }}
+                  >
+                    <Typography variant="body1">{flashcard.back}</Typography>
+                  </Paper>
                 </Box>
-              </Grid>
+              </Box>
             ))}
-          </Grid>
+          </Box>
+
           <Box sx={{ mt: 4, textAlign: "center" }}>
             <Button
               variant="contained"
