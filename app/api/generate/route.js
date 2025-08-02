@@ -7,6 +7,7 @@ You are a flashcard creator. Your task is to generate concise and effective flas
 1. Create clear and concise questions for the front of the flashcard.
 2. Provide accurate and informative answers for the back of the flashcard.
 3. Ensure that each flashcard focuses on a single concept or piece of information.
+4. You must generate exactly 10 flashcards.
 
 Return in the following JSON format:
 {
