@@ -147,7 +147,16 @@ export default function Generate() {
           </Typography>
           <Grid container spacing={2} justifyContent="center" sx={{ mt: 2 }}>
             {flashcards.map((flashcard, index) => (
-              <Grid item xs={12} sm={4} md={2.4} key={index}>
+              <Grid
+                item
+                key={index}
+                sx={{
+                  flexBasis: "20%",
+                  maxWidth: "20%",
+                  padding: "8px",
+                  boxSizing: "border-box",
+                }}
+              >
                 <Box
                   onClick={() => handleCardClick(index)}
                   sx={{
