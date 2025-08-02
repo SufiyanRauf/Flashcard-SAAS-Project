@@ -3,9 +3,6 @@ import {
   Alert,
   Box,
   Button,
-  Card,
-  CardActionArea,
-  CardContent,
   Container,
   Dialog,
   DialogActions,
@@ -148,87 +145,71 @@ export default function Generate() {
           <Typography variant="h5" gutterBottom>
             Flashcards Preview
           </Typography>
-          <Grid container spacing={2} sx={{ mt: 2 }}>
+          <Grid container spacing={2} justifyContent="center" sx={{ mt: 2 }}>
             {flashcards.map((flashcard, index) => (
-              <Grid item xs={12} sm={6} md={2.4} key={index}>
-                <CardActionArea
+              <Grid item xs={12} sm={4} md={2.4} key={index}>
+                <Box
                   onClick={() => handleCardClick(index)}
                   sx={{
-                    borderRadius: 4,
-                    height: "250px",
                     perspective: "1000px",
+                    cursor: "pointer",
+                    height: "250px",
+                    width: "100%",
                   }}
                 >
-                  <Card
+                  <Box
                     sx={{
                       width: "100%",
                       height: "100%",
-                      borderRadius: 4,
+                      position: "relative",
                       transformStyle: "preserve-3d",
                       transition: "transform 0.7s",
                       transform: flipped[index] ? "rotateY(180deg)" : "rotateY(0deg)",
                     }}
                   >
-                    {/* Front of the card */}
-                    <CardContent
+                    {/* Front Face */}
+                    <Paper
+                      elevation={4}
                       sx={{
-                        padding: 0,
-                        "&:last-child": { paddingBottom: 0 },
-                        backfaceVisibility: "hidden",
                         position: "absolute",
                         width: "100%",
                         height: "100%",
+                        backfaceVisibility: "hidden",
+                        display: "flex",
+                        justifyContent: "center",
+                        alignItems: "center",
+                        textAlign: "center",
+                        p: 2,
+                        borderRadius: 4,
+                        boxSizing: "border-box",
                       }}
                     >
-                      <Box
-                        sx={{
-                          display: "flex",
-                          justifyContent: "center",
-                          alignItems: "center",
-                          textAlign: "center",
-                          p: 2,
-                          height: "100%",
-                          backgroundColor: "background.paper",
-                          borderRadius: "inherit",
-                        }}
-                      >
-                        <Typography variant="body1" component="div">
-                          {flashcard.front}
-                        </Typography>
-                      </Box>
-                    </CardContent>
-                    {/* Back of the card */}
-                    <CardContent
+                      <Typography variant="body1">{flashcard.front}</Typography>
+                    </Paper>
+                    {/* Back Face */}
+                    <Paper
+                      elevation={4}
                       sx={{
-                        padding: 0,
-                        "&:last-child": { paddingBottom: 0 },
+                        position: "absolute",
+                        width: "100%",
+                        height: "100%",
                         backfaceVisibility: "hidden",
                         transform: "rotateY(180deg)",
-                        position: "absolute",
-                        width: "100%",
-                        height: "100%",
+                        display: "flex",
+                        justifyContent: "center",
+                        alignItems: "center",
+                        textAlign: "center",
+                        p: 2,
+                        borderRadius: 4,
+                        boxSizing: "border-box",
+                        backgroundColor: "primary.main",
+                        color: "primary.contrastText",
                       }}
                     >
-                      <Box
-                        sx={{
-                          display: "flex",
-                          justifyContent: "center",
-                          alignItems: "center",
-                          textAlign: "center",
-                          p: 2,
-                          height: "100%",
-                          backgroundColor: "primary.light",
-                          color: "primary.contrastText",
-                          borderRadius: "inherit",
-                        }}
-                      >
-                        <Typography variant="body1" component="div">
-                          {flashcard.back}
-                        </Typography>
-                      </Box>
-                    </CardContent>
-                  </Card>
-                </CardActionArea>
+                      <Typography variant="body1">{flashcard.back}</Typography>
+                    </Paper>
+                  </Box>
+                </Box>
               </Grid>
             ))}
           </Grid>
