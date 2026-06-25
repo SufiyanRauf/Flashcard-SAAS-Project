@@ -2,6 +2,8 @@
 
 A full-stack SaaS that turns notes or any block of text into study flashcards using Google Gemini. Built with Next.js, with Clerk for authentication, Firestore for storage, and Stripe Checkout for subscription billing.
 
+I built this as a computer science student because I thought it would be a useful study tool for myself. Making flashcards from my notes automatically is a lot faster than writing them all out by hand.
+
 **Live demo:** https://flashcard-saas-project.vercel.app/
 
 ![SparkCards](screenshot.png)
