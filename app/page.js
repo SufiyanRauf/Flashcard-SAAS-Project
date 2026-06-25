@@ -19,17 +19,17 @@ const features = [
   {
     icon: <EditNoteIcon sx={{ fontSize: 48, color: 'primary.main' }} />,
     title: "Paste Your Notes",
-    description: "Simply paste any text—from lecture notes to articles—and let our AI do the rest.",
+    description: "Paste in any text, like lecture notes or an article. That is the only step you do yourself.",
   },
   {
     icon: <AutoAwesomeIcon sx={{ fontSize: 48, color: 'primary.main' }} />,
-    title: "AI-Powered Magic",
-    description: "Our smart AI analyzes your text and generates clear, concise flashcards in seconds.",
+    title: "AI Generates the Cards",
+    description: "It reads through your text and turns the main points into question-and-answer flashcards.",
   },
   {
     icon: <DevicesIcon sx={{ fontSize: 48, color: 'primary.main' }} />,
     title: "Study Anywhere",
-    description: "Access your flashcards on any device, making it easy to study on the go.",
+    description: "Your decks are saved to your account, so you can open them on any device.",
   },
 ];
 
@@ -73,7 +73,7 @@ export default function Home() {
             Turn Your Notes into Knowledge.
           </Typography>
           <Typography variant="h5" component="p" color="text.secondary" sx={{ mb: 4, maxWidth: "700px", mx: "auto" }}>
-            The smartest way to create flashcards. Paste your text, and let our AI handle the rest.
+            Paste in your notes and it turns them into flashcards you can study.
           </Typography>
           <Button
             variant="contained"
@@ -90,19 +90,29 @@ export default function Home() {
           <Typography variant="h4" component="h2" gutterBottom align="center" sx={{ mb: 6 }}>
             How It Works
           </Typography>
-          <Grid container spacing={4}>
+          <Box sx={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: 4 }}>
             {features.map((feature) => (
-              <Grid item xs={12} md={4} key={feature.title}>
-                <Paper sx={{ p: 4, textAlign: 'center', height: '100%' }}>
-                  <Box sx={{ mb: 2 }}>
-                    {feature.icon}
-                  </Box>
-                  <Typography variant="h6" gutterBottom>{feature.title}</Typography>
-                  <Typography color="text.secondary">{feature.description}</Typography>
-                </Paper>
-              </Grid>
+              <Paper
+                key={feature.title}
+                sx={{
+                  p: 4,
+                  textAlign: 'center',
+                  flex: '1 1 0',
+                  minWidth: 240,
+                  maxWidth: 360,
+                  display: 'flex',
+                  flexDirection: 'column',
+                  alignItems: 'center',
+                }}
+              >
+                <Box sx={{ mb: 2 }}>
+                  {feature.icon}
+                </Box>
+                <Typography variant="h6" gutterBottom>{feature.title}</Typography>
+                <Typography color="text.secondary">{feature.description}</Typography>
+              </Paper>
             ))}
-          </Grid>
+          </Box>
         </Box>
 
         {/* Pricing Section */}

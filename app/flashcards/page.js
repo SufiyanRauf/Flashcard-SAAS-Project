@@ -5,7 +5,6 @@ import {
   CardActionArea,
   CardContent,
   Container,
-  Grid,
   Typography,
 } from "@mui/material";
 import { useUser } from "@clerk/nextjs";
@@ -40,23 +39,33 @@ export default function Flashcards() {
   if (!isLoaded || !isSignedIn) return null;
 
   return (
-    <Container sx={{ width: "100vw" }}>
-      <Typography variant="h4" sx={{ my: 4 }}>
+    <Container sx={{ py: 4 }}>
+      <Typography variant="h4" sx={{ mb: 4 }}>
         My Flashcards
       </Typography>
-      <Grid container spacing={3}>
-        {flashcards.map((flashcard, index) => (
-          <Grid item xs={12} sm={6} md={4} key={index}>
-            <Card>
+      {flashcards.length === 0 ? (
+        <Typography color="text.secondary">
+          You have not saved any flashcard decks yet. Head to the Create page to make some.
+        </Typography>
+      ) : (
+        <Box
+          sx={{
+            display: "grid",
+            gridTemplateColumns: "repeat(auto-fill, minmax(240px, 1fr))",
+            gap: 3,
+          }}
+        >
+          {flashcards.map((flashcard, index) => (
+            <Card key={index}>
               <CardActionArea onClick={() => handleCardClick(flashcard.name)}>
                 <CardContent>
                   <Typography variant="h6">{flashcard.name}</Typography>
                 </CardContent>
               </CardActionArea>
             </Card>
-          </Grid>
-        ))}
-      </Grid>
+          ))}
+        </Box>
+      )}
     </Container>
   );
 }

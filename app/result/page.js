@@ -68,9 +68,7 @@ function ResultsDisplay() {
       <Container sx={{ mt: 4 }}>
         <Typography variant="h4">Thank you for purchasing!</Typography>
         <Box sx={{ mt: 2 }}>
-          <Typography variant="h6">Session ID:</Typography>
-          <Typography variant="body1">{session.id}</Typography>
-          <Typography variant="body1" sx={{ mt: 2 }}>
+          <Typography variant="body1">
             We have received your payment. You will receive an email with the
             order details shortly.
           </Typography>

@@ -72,11 +72,9 @@ const theme = createTheme({
           boxShadow: 'none',
         },
         containedPrimary: {
-          background: 'linear-gradient(45deg, #7e57c2 30%, #673ab7 90%)',
-          transition: 'transform 0.2s ease-in-out',
+          backgroundColor: '#673ab7',
           '&:hover': {
-            transform: 'scale(1.05)',
-            boxShadow: '0 4px 20px rgba(103, 58, 183, 0.4)',
+            backgroundColor: '#5e35b1',
           }
         }
       },
@@ -84,12 +82,8 @@ const theme = createTheme({
     MuiPaper: {
         styleOverrides: {
             root: {
+                border: "1px solid #e6e1ee",
                 boxShadow: "0 4px 20px rgba(0,0,0,0.05)", // Softer shadows
-                transition: "transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out",
-                "&:hover": {
-                  transform: "translateY(-5px)",
-                  boxShadow: "0 8px 30px rgba(0,0,0,0.1)",
-                },
             }
         }
     },

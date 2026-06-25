@@ -6,7 +6,6 @@ import {
   CardActionArea,
   CardContent,
   Container,
-  Grid,
   Typography,
   CircularProgress,
 } from "@mui/material";
@@ -53,10 +52,16 @@ function FlashcardGrid() {
   }
 
   return (
-    <Grid container spacing={3} sx={{ mt: 4 }}>
+    <Box
+      sx={{
+        display: "grid",
+        gridTemplateColumns: "repeat(auto-fill, minmax(240px, 1fr))",
+        gap: 3,
+        mt: 4,
+      }}
+    >
       {flashcards.map((flashcard, index) => (
-        <Grid item xs={12} sm={6} md={4} key={index}>
-          <CardActionArea onClick={() => handleCardClick(index)}>
+        <CardActionArea key={index} onClick={() => handleCardClick(index)}>
             <Card>
               <CardContent>
                 <Box
@@ -111,17 +116,16 @@ function FlashcardGrid() {
                 </Box>
               </CardContent>
             </Card>
-          </CardActionArea>
-        </Grid>
+        </CardActionArea>
       ))}
-    </Grid>
+    </Box>
   );
 }
 
 // The main page now wraps the component in Suspense
 export default function FlashcardPage() {
   return (
-    <Container sx={{ width: "100vw" }}>
+    <Container sx={{ py: 4 }}>
       <Suspense fallback={<Box sx={{ display: 'flex', justifyContent: 'center', mt: 10 }}><CircularProgress /></Box>}>
         <FlashcardGrid />
       </Suspense>

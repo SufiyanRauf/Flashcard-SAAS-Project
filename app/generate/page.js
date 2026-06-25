@@ -114,7 +114,7 @@ export default function Generate() {
           Ready to Learn?
         </Typography>
         <Typography variant="body1" color="text.secondary" sx={{ mb: 3 }}>
-          Enter a topic, paste your notes, or ask a question below. Our AI will instantly create a set of 10 flashcards to get you started.
+          Enter a topic or paste your notes below, and get a set of 10 flashcards to study from.
         </Typography>
         <Paper sx={{ p: 2 }}>
           <TextField
@@ -145,11 +145,11 @@ export default function Generate() {
             Flashcards Preview
           </Typography>
 
-          {/* Fixed 2-row, 5-column grid */}
+          {/* Responsive grid of the generated flashcards */}
           <Box
             sx={{
               display: "grid",
-              gridTemplateColumns: "repeat(5, 1fr)",
+              gridTemplateColumns: "repeat(auto-fill, minmax(200px, 1fr))",
               gap: 2,
               mt: 2,
             }}
@@ -224,7 +224,7 @@ export default function Generate() {
           <Box sx={{ mt: 4, textAlign: "center" }}>
             <Button
               variant="contained"
-              color="secondary"
+              color="primary"
               onClick={handleOpen}
             >
               Save
