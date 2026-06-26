@@ -34,7 +34,12 @@ I built this as a computer science student because I thought it would be a usefu
    CLERK_SECRET_KEY=your_clerk_secret
    NEXT_PUBLIC_STRIPE_PUBLIC_KEY=your_stripe_public_key
    STRIPE_SECRET_KEY=your_stripe_secret_key
-   # plus your Firebase config (NEXT_PUBLIC_FIREBASE_API_KEY, etc.)
+   NEXT_PUBLIC_FIREBASE_API_KEY=your_firebase_api_key
+   NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN=your_firebase_auth_domain
+   NEXT_PUBLIC_FIREBASE_PROJECT_ID=your_firebase_project_id
+   NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET=your_firebase_storage_bucket
+   NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID=your_firebase_sender_id
+   NEXT_PUBLIC_FIREBASE_APP_ID=your_firebase_app_id
    ```
 3. Start the dev server:
    ```bash
