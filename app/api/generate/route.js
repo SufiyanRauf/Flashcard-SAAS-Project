@@ -30,21 +30,17 @@ export async function POST(req) {
     const response = await result.response;
     let responseText = response.text();
 
-    // Find the start and end of the JSON object
     const jsonStart = responseText.indexOf('{');
     const jsonEnd = responseText.lastIndexOf('}');
 
     if (jsonStart !== -1 && jsonEnd !== -1) {
-      // Extract the JSON string
       responseText = responseText.substring(jsonStart, jsonEnd + 1);
     }
 
     try {
-      // Attempt to parse the cleaned JSON
       const flashcards = JSON.parse(responseText);
       return NextResponse.json({ flashcards: flashcards.flashcards });
     } catch (e) {
-      // If parsing fails, the model likely returned a non-JSON response.
       console.error("Failed to parse JSON from Gemini API:", responseText);
       return NextResponse.json({ error: "The AI returned an invalid response. Please try again." }, { status: 500 });
     }
